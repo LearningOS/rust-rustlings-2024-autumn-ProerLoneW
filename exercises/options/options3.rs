@@ -3,7 +3,7 @@
 // Execute `rustlings hint options3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 struct Point {
     x: i32,
@@ -14,8 +14,11 @@ fn main() {
     let y: Option<Point> = Some(Point { x: 100, y: 200 });
 
     match y {
-        Some(p) => println!("Co-ordinates are {},{} ", p.x, p.y),
+        Some(ref p) => println!("Co-ordinates are {},{} ", p.x, p.y),
         _ => panic!("no match!"),
     }
     y; // Fix without deleting this line.
+    // 上面这里的 ref 表示借用， 不发生所有权的转移
+    // 如果不用， 则 y 的所有权发生转移，而这个代码最后一句话又是
+    // y； 使用了y所以报错, 当我们不想转移被匹配的 y 的所有权时就要用ref
 }

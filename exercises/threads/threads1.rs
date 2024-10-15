@@ -8,7 +8,7 @@
 // Execute `rustlings hint threads1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::thread;
 use std::time::{Duration, Instant};
@@ -25,8 +25,13 @@ fn main() {
     }
 
     let mut results: Vec<u128> = vec![];
+    // for handle in handles {
+    //     // TODO: a struct is returned from thread::spawn, can you use it?
+    // }
     for handle in handles {
-        // TODO: a struct is returned from thread::spawn, can you use it?
+        // 等待线程完成，并收集其返回值
+        let result = handle.join().unwrap();  // 获取线程的返回值（执行时间）
+        results.push(result);  // 将返回值加入结果向量
     }
 
     if results.len() != 10 {

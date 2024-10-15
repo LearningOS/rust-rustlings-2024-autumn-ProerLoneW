@@ -8,6 +8,8 @@
 
 fn main() {
     let a = [0; 1000];
+    // let array = ["Are we there yet?"; 10];
+    // 1000个相同的初始化值
 
     if a.len() >= 100 {
         println!("Wow, that's a big array!");

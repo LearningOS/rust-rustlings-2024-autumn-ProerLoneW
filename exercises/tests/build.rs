@@ -14,11 +14,15 @@ fn main() {
         "Your command here with {}, please checkout exercises/tests/build.rs",
         timestamp
     );
-    println!("cargo:{}", your_command);
+    // println!("cargo:{}", your_command);
+    // 设置环境变量 TEST_FOO，使用 println! 来通知 Cargo
+    println!("cargo:rustc-env=TEST_FOO={}", timestamp);
 
     // In tests8, we should enable "pass" feature to make the
     // testcase return early. Fill in the command to tell
     // Cargo about that.
     let your_command = "Your command here, please checkout exercises/tests/build.rs";
-    println!("cargo:{}", your_command);
+    // println!("cargo:{}", your_command);
+    // 设置特性标志 "pass"，以便在 tests8 中启用该特性
+    println!("cargo:rustc-cfg=feature=\"pass\"");
 }

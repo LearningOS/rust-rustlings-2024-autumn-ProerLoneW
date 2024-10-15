@@ -3,7 +3,7 @@
 // Execute `rustlings hint errors4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 #[derive(PartialEq, Debug)]
 struct PositiveNonzeroInteger(u64);
@@ -17,7 +17,19 @@ enum CreationError {
 impl PositiveNonzeroInteger {
     fn new(value: i64) -> Result<PositiveNonzeroInteger, CreationError> {
         // Hmm...? Why is this only returning an Ok value?
-        Ok(PositiveNonzeroInteger(value as u64))
+        
+        // 如果值为负数，返回错误 Negative
+        if value < 0 {
+            Err(CreationError::Negative)
+        }
+        // 如果值为 0，返回错误 Zero
+        else if value == 0 {
+            Err(CreationError::Zero)
+        }
+        // 否则返回 Ok 包裹的 PositiveNonzeroInteger
+        else {
+            Ok(PositiveNonzeroInteger(value as u64))
+        }
     }
 }
 

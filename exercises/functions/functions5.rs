@@ -10,5 +10,6 @@ fn main() {
 }
 
 fn square(num: i32) -> i32 {
-    num * num
+    num * num // 语句返回类型 num * num; 返回类型
+    // return num * num; 则返回的是值
 }

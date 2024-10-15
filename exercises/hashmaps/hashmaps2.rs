@@ -14,7 +14,7 @@
 // Execute `rustlings hint hashmaps2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::collections::HashMap;
 
@@ -40,6 +40,27 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // TODO: Insert new fruits if they are not already present in the
         // basket. Note that you are not allowed to put any type of fruit that's
         // already present!
+        
+        // 哈希表 的 or_insert 可还行
+        basket.entry(fruit).or_insert(1);
+
+        // 下边是 entry 的用法，很智能
+        // let mut basket = HashMap::new();
+
+        // 插入苹果，初始值为 5
+        // basket.insert("Apple", 5);
+
+        // 使用 .entry 查询 "Apple" 键，并增加数量
+        // let apple_entry = basket.entry("Apple").or_insert(0);
+        // *apple_entry += 2;  // 如果 "Apple" 存在，则 apple_entry 为可变引用，增加其值
+
+        // 如果 "Banana" 不存在，则插入 0 并返回其引用
+        // let banana_entry = basket.entry("Banana").or_insert(0);
+        // *banana_entry += 1;  // 对 "Banana" 进行初始化并修改
+
+        // 打印结果
+        // println!("{:?}", basket);
+
     }
 }
 

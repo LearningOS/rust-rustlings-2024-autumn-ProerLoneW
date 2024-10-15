@@ -2,11 +2,11 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
+
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
-use std::vec::*;
+// use std::vec::*;
 
 #[derive(Debug)]
 struct Node<T> {
@@ -43,6 +43,16 @@ impl<T> LinkedList<T> {
             end: None,
         }
     }
+}
+// PartialOrd 表示有大小顺序
+impl<T: PartialOrd + Clone> LinkedList<T> {
+    // pub fn new() -> Self {
+    //     Self {
+    //         length: 0,
+    //         start: None,
+    //         end: None,
+    //     }
+    // }
 
     pub fn add(&mut self, obj: T) {
         let mut node = Box::new(Node::new(obj));
@@ -69,14 +79,48 @@ impl<T> LinkedList<T> {
             },
         }
     }
-	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
+	pub fn merge(list_a:LinkedList<T>, list_b:LinkedList<T>) -> Self
 	{
 		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+		// Self {
+        //     length: 0,
+        //     start: None,
+        //     end: None,
+        // };
+        // let mut i = list_a.size();
+        // let mut j = list_b.size();
+        let mut merged_list = LinkedList::new();  // 创建一个新的链表用于存储结果
+        let mut current_a = list_a.start;
+        let mut current_b = list_b.start;
+
+        // 遍历两个链表，依次比较并合并
+        while let (Some(a_ptr), Some(b_ptr)) = (current_a, current_b) {
+            unsafe {
+                if (*a_ptr.as_ptr()).val <= (*b_ptr.as_ptr()).val {
+                    merged_list.add((*a_ptr.as_ptr()).val.clone());
+                    current_a = (*a_ptr.as_ptr()).next;
+                } else {
+                    merged_list.add((*b_ptr.as_ptr()).val.clone());
+                    current_b = (*b_ptr.as_ptr()).next;
+                }
+            }
         }
+
+        // 将剩下的链表追加到 merged_list
+        while let Some(a_ptr) = current_a {
+            unsafe {
+                merged_list.add((*a_ptr.as_ptr()).val.clone());
+                current_a = (*a_ptr.as_ptr()).next;
+            }
+        }
+
+        while let Some(b_ptr) = current_b {
+            unsafe {
+                merged_list.add((*b_ptr.as_ptr()).val.clone());
+                current_b = (*b_ptr.as_ptr()).next;
+            }
+        }
+        merged_list  // 返回合并后的链表
 	}
 }
 
